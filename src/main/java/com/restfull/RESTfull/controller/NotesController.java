@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 @RestController
@@ -32,8 +33,8 @@ public class NotesController {
         return service.delete(name,id);
     }
 
-    @GetMapping("notes")
-    public List<MNote> getNotes(){
-        return service.getList();
+    @GetMapping(value = "/notes")
+    public List<MNote> getNotes(Pageable pageable){
+        return service.getForPaginate(pageable);
     }
 }
